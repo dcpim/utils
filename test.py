@@ -2,48 +2,46 @@
 
 import dcpim
 
-jsonfile = "/tmp/" + dcpim.guid() + ".json"
-jsondata = {'name': "Hello world", 'results': ["test 1", "test 2", "test 3"]}
+json_file = "/tmp/" + dcpim.guid() + ".json"
+json_data = {'name': "Hello world", 'results': ["test 1", "test 2", "test 3"]}
 
 # guid
-assert len(dcpim._test("guid", [])) == 16
-assert len(dcpim._test("guid", [32])) == 32
+assert len(dcpim.test("guid", [])) == 16
+assert len(dcpim.test("guid", [32])) == 32
 
 # in_tag
-assert dcpim._test("in_tag", [
+assert dcpim.test("in_tag", [
 	"<p>This is a link to <a href='http://google.com'>Google</a>.</p>",
 	"a"
 ]) == "Google"
-assert dcpim._test("in_tag", [
+assert dcpim.test("in_tag", [
 	"this random string is something, right?",
 	"random", ","
 ]) == "string is something"
-assert dcpim._test("in_tag", [
+assert dcpim.test("in_tag", [
 	"this random string is something, right?",
 	"umbrella", ","
 ]) == ""
 
 # save
-assert not dcpim._test("save", [jsonfile, jsondata])
+assert not dcpim.test("save", [json_file, json_data])
 
 # load
-assert dcpim._test("load", [jsonfile]) == jsondata
+assert dcpim.test("load", [json_file]) == json_data
 
 # unixtime
-assert dcpim._test("unixtime", []) > 1
+assert dcpim.test("unixtime", []) > 1
 
 # now
-assert len(dcpim._test("now", [])) == 19
+assert len(dcpim.test("now", [])) == 19
 
 # max_len
-assert dcpim._test("max_len", [
+assert dcpim.test("max_len", [
 	"This text is too long to fit in the max len.",
 	25
 ]) == "This text is too long ..."
 
 # remove_spaces
-assert dcpim._test("remove_spaces", [
+assert dcpim.test("remove_spaces", [
 	"  This is  a test of   the \"emergency  broadcast system\". "
 ]) == "This is a test of the \"emergency broadcast system\"."
-
-

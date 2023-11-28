@@ -344,7 +344,7 @@ def list_files(folder, pattern="*"):
 
 
 
-def _test(func, arg):
+def test(func, arg):
 	""" Test a function with optional arguments.
 	"""
 	possibles = globals().copy()
@@ -354,8 +354,8 @@ def _test(func, arg):
 		a = method(*arg)
 		print(a)
 		print()
-		return a
 	except:
 		print(error())
 		print()
-		quit(1)
+		exit(1)
+	return a
