@@ -2,6 +2,7 @@
 
 This repo contains a Python library used by DCPIM providing various useful functions.
 
+
     alphanum(text, symbols=False, spaces=False)
         Return only letters, numbers and optionally basic symbols and spaces in a string.
         @param text: The string to process
