@@ -351,7 +351,11 @@ def _test(func, arg):
 	print("* dcpim." + func + "(" + str(arg)[1:-1] + ")")
 	method = possibles.get(func)
 	try:
-		print(method(*arg))
+		a = method(*arg)
+		print(a)
+		print()
+		return a
 	except:
 		print(error())
-	print()
+		print()
+		quit(1)
