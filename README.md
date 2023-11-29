@@ -2,7 +2,7 @@
 
 This repo contains a Python library used by DCPIM providing various useful functions.
 
-[USAGE.txt](See USAGE.txt file)
+[USAGE.txt]
 
 
 # Authors
