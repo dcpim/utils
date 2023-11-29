@@ -138,6 +138,9 @@ FUNCTIONS
         @param log_name: The name to use in syslog
         @param log_debug: Log at a debug log level
     
+    test(func, arg)
+        Test a function with optional arguments.
+    
     unixtime()
         Return the current UTC time in seconds.
     

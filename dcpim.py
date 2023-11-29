@@ -299,7 +299,7 @@ def in_list(ldict, key, value):
 			@param value: The value to look for
 	"""
 	for l in ldict:
-		if l[key] == value:
+		if key in l and l[key] == value:
 			return True
 	return False
 
@@ -307,7 +307,7 @@ def remove_spaces(text):
 	""" Remove extra spaces from a string.
 			@param text: The string to process
 	"""
-	return re.sub(r"\s\s+", " ", text).strip()
+	return re.sub(r'\s\s+', ' ', text).strip()
 
 def cmd(command):
 	""" Run a command and return the output.

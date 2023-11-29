@@ -92,26 +92,4 @@ assert dcpim.test("in_list", [
 	"name",
 	"Hello world"
 ]) == True
-assert dcpim.test("in_list", [
-	[json_data],
-	"name",
-	"John"
-]) == False
-assert dcpim.test("in_list", [
-	[json_data],
-	"age",
-	42
-]) == False
 
-# remove_spaces
-assert dcpim.test("remove_spaces", [
-	" This  is   a test.  "
-]) == "This is a test."
-
-# cmd
-assert dcpim.test("cmd", ["date > /dev/null && echo 1"]) == "1"
-
-# alphanum
-assert dcpim.test("alphanum", ["Sp@c1al str%"]) == "Spc1alstr"
-assert dcpim.test("alphanum", ["Sp@c1al str%", False, True]) == "Spc1al str"
-assert dcpim.test("alphanum", ["Sp@c1al str%", True, False]) == "Sp@c1alstr"
