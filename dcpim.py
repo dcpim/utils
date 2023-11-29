@@ -357,5 +357,5 @@ def test(func, arg):
 	except:
 		print(error())
 		print()
-		exit(1)
+		sys.exit(1)
 	return a
