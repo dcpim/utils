@@ -352,7 +352,7 @@ def test(func, arg):
 	method = possibles.get(func)
 	try:
 		a = method(*arg)
-		print(a)
+		print(str(a)[:300])
 		print()
 	except:
 		print(error())

@@ -115,3 +115,9 @@ assert dcpim.test("cmd", ["date > /dev/null && echo 1"]) == "1"
 assert dcpim.test("alphanum", ["Sp@c1al str%"]) == "Spc1alstr"
 assert dcpim.test("alphanum", ["Sp@c1al str%", False, True]) == "Spc1al str"
 assert dcpim.test("alphanum", ["Sp@c1al str%", True, False]) == "Sp@c1alstr"
+
+# curl
+assert "html" in dcpim.test("curl", ["https://google.com"])
+
+# header
+assert "Content-Type" in dcpim.test("header", [])
