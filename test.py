@@ -55,16 +55,16 @@ assert dcpim.test("urlencode", [
 ]) == "This+is+a+%25+symbol%21"
 
 # is_int
-assert dcpim.test("is_int", [5]) == True
-assert dcpim.test("is_int", [5.10]) == True
-assert dcpim.test("is_int", ["5"]) == True
-assert dcpim.test("is_int", ["test"]) == False
+assert dcpim.test("is_int", [5]) is True
+assert dcpim.test("is_int", [5.10]) is True
+assert dcpim.test("is_int", ["5"]) is True
+assert dcpim.test("is_int", ["test"]) is False
 
 # is_float
-assert dcpim.test("is_float", [2]) == True
-assert dcpim.test("is_float", [2.87]) == True
-assert dcpim.test("is_float", ["2.87"]) == True
-assert dcpim.test("is_float", ["test"]) == False
+assert dcpim.test("is_float", [2]) is True
+assert dcpim.test("is_float", [2.87]) is True
+assert dcpim.test("is_float", ["2.87"]) is True
+assert dcpim.test("is_float", ["test"]) is False
 
 # base36
 assert dcpim.test("base36", [92837]) == "1ZMT"
@@ -91,17 +91,17 @@ assert dcpim.test("in_list", [
 	[json_data],
 	"name",
 	"Hello world"
-]) == True
+]) is True
 assert dcpim.test("in_list", [
 	[json_data],
 	"name",
 	"John"
-]) == False
+]) is False
 assert dcpim.test("in_list", [
 	[json_data],
 	"age",
 	42
-]) == False
+]) is False
 
 # remove_spaces
 assert dcpim.test("remove_spaces", [
