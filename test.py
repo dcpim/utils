@@ -2,7 +2,7 @@
 
 import dcpim
 
-json_file = "/tmp/" + dcpim.guid() + ".json"
+JSONFILE = "/tmp/" + dcpim.guid() + ".json"
 json_data = {'name': "Hello world", 'results': ["test 1", "test 2", "test 3"]}
 
 # guid
@@ -24,10 +24,10 @@ assert dcpim.test("in_tag", [
 ]) == ""
 
 # save
-assert not dcpim.test("save", [json_file, json_data])
+assert not dcpim.test("save", [JSONFILE, json_data])
 
 # load
-assert dcpim.test("load", [json_file]) == json_data
+assert dcpim.test("load", [JSONFILE]) == json_data
 
 # unixtime
 assert dcpim.test("unixtime", []) > 1
