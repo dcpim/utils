@@ -109,7 +109,7 @@ assert dcpim.test("remove_spaces", [
 ]) == "This is a test."
 
 # cmd
-assert dcpim.test("cmd", ["date > /dev/null && echo 1"]) == "0"
+assert dcpim.test("cmd", ["date > /dev/null && echo 1"]) == "1"
 
 # alphanum
 assert dcpim.test("alphanum", ["Sp@c1al str%"]) == "Spc1alstr"
