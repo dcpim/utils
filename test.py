@@ -109,7 +109,7 @@ assert dcpim.test("remove_spaces", [
 ]) == "This is a test."
 
 # download
-assert dcpim.test("download", ["https://github.com/dcpim/utils/archive/refs/heads/main.zip"]) == "1"
+assert not dcpim.test("download", ["https://github.com/dcpim/utils/archive/refs/heads/main.zip", "/tmp/main.zip])
 
 # cmd
 assert dcpim.test("cmd", ["date > /dev/null && echo 1"]) == "1"
