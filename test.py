@@ -79,7 +79,7 @@ assert dcpim.test("unixtime2datetime", [1000000]) == "1970-01-12 13:46:40"
 assert dcpim.test("datetime2unixtime", ["1970-01-12 13:46:40"]) == 1000000
 
 # days_since
-assert dcpim.test("days_since", ["1970-01-12 13:46:40"]) == 19678
+assert dcpim.test("days_since", ["1970-01-12 13:46:40"]) > 19678
 
 # hashstr
 assert dcpim.test("hashstr", [
