@@ -1,5 +1,6 @@
 """Run tests for DCPIM utils."""
 
+import time
 import dcpim
 
 JSONFILE = "/tmp/" + dcpim.guid() + ".json"
@@ -136,5 +137,32 @@ assert len(dcpim.test("list_files", ["."])) > 5
 
 # DynamoDB
 TABLE = dcpim.guid()
-assert "Success" in dcpim.test("db_create", [TABLE])
-assert "Success" in dcpim.test("db_delete", [TABLE])
+assert "TableDescription" in dcpim.test("db_create", [TABLE])
+time.sleep(10)
+assert "RequestId" in dcpim.test("db_put", [
+	TABLE,
+	"key1",
+	"My value"
+])
+assert "RequestId" in dcpim.test("db_put", [
+	TABLE,
+	"key2",
+	"A first value"
+])
+assert "RequestId" in dcpim.test("db_put", [
+	TABLE,
+	"key2",
+	"A second value"
+])
+assert "RequestId" in dcpim.test("db_put", [
+	TABLE,
+	"key3",
+	{'name': 'John Doe', 'age': 28}
+])
+assert dcpim.test("db_get", [TABLE, "key2"]) \
+	== "A second value"
+assert dcpim.test("db_get", [TABLE, "key3"]) \
+	== "{'name': 'John Doe', 'age': 28}"
+assert len(dcpim.test("db_get", [TABLE])) == 3
+time.sleep(5)
+assert "TableDescription" in dcpim.test("db_delete", [TABLE])

@@ -370,6 +370,41 @@ def db_delete(table):
  	)
 	return result
 
+def db_put(table, key, value):
+	""" Store a key/value in a DynamoDB table.
+			@param table: The name of the table.
+			@param key: Key name.
+			@param value: Value to store.
+	"""
+	db = boto3.client('dynamodb')
+	result = db.put_item(
+		TableName = table,
+		Item = {
+			"key": {'S': key},
+			"value": {'S': str(value)}
+		}
+	)
+	return result['ResponseMetadata']
+
+def db_get(table, key = None):
+	""" Return the value for a key or a list of key/value
+		items from a DynamoDB table.
+			@param table: The name of the table.
+			@param key: Key name (optional).
+	"""
+	db = boto3.client('dynamodb')
+	if not key:
+		output = []
+		result = db.scan(TableName = table)
+		for item in result['Items']:
+			output.append({item['key']['S']: item['value']['S']})
+		return output
+	result = db.get_item(
+		TableName = table,
+		Key = { "key": {'S': key} }
+	)
+	return result['Item']['value']['S']
+
 
 def test(func, arg):
 	""" Test a function with optional arguments.

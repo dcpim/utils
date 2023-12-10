@@ -44,6 +44,26 @@ FUNCTIONS
         Return number of days since a specific UTC time and date.
         @param timestamp: A time in 'YYYY-MM-DD HH:MM:SS' format
     
+    db_create(table)
+        Create a key/value table in DynamoDB.
+        @param table: The name of the table.
+    
+    db_delete(table)
+        Delete a key/value table from DynamoDB.
+        @param table: The name of the table.
+    
+    db_get(table, key=None)
+        Return the value for a key or a list of key/value
+        items from a DynamoDB table.
+                @param table: The name of the table.
+                @param key: Key name (optional).
+    
+    db_put(table, key, value)
+        Store a key/value in a DynamoDB table.
+        @param table: The name of the table.
+        @param key: Key name.
+        @param value: Value to store.
+    
     download(url, localfile)
         Download a file from the Internet.
         @param url: The url of the file
@@ -153,7 +173,7 @@ FUNCTIONS
         @param text: The text to encode
 
 DATA
-    __VERSION__ = '1.0'
+    __VERSION__ = '1.0.1'
 
 FILE
     /home/s24/git/utils/dcpim/dcpim.py
