@@ -210,11 +210,12 @@ def hashfile(filename):
 	"""
 	bsize = 65536
 	hasher = hashlib.sha256()
-	with open(filename, "rb", encoding='UTF-8') as fd:
-		buf = fd.read(bsize)
-		while len(buf) > 0:
-			hasher.update(buf)
-			buf = fd.read(bsize)
+	with open(filename, "rb") as fd:
+		while True:
+			data = fd.read(bsize)
+			if not data:
+				break
+			hasher.update(data)
 	return str(hasher.hexdigest()).upper()
 
 def hashstr(text):
