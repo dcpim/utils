@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install setuptools twine
+        python -m pip install setuptools twine boto3
         pip install build
     - name: Update USAGE.txt
       run: python -c "import dcpim;help(dcpim.dcpim)" > USAGE.txt
