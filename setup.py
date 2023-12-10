@@ -1,11 +1,11 @@
 """ Setup file fopr PyPi. """
 from setuptools import setup
 import dcpim
-import boto3
 
 setup(
   name = 'dcpim',
   packages = ['dcpim'],
+  install_requires = ['boto3'],
   version = dcpim.dcpim.__VERSION__,
   description = 'This is a general purpose Python 3.x library used by DCPIM.',
   author = 'Patrick Lambert',
