@@ -11,7 +11,6 @@ import sys
 import time
 import uuid
 import json
-import boto3
 import string
 import random
 import fnmatch
@@ -23,6 +22,7 @@ import datetime
 import urllib.parse
 import urllib.request
 from http.cookiejar import CookieJar
+import boto3
 
 def syslog(log_name, log_debug = False):
 	""" Return a handle for syslog with sensible defaults.
@@ -344,6 +344,9 @@ def list_files(folder, pattern="*"):
 	return matches
 
 def db_create(table):
+	""" Create a key/value table in DynamoDB.
+			@param table: The name of the table.
+	"""
 	db = boto3.client('dynamodb')
 	result = db.create_table(
  		TableName = table,
@@ -358,6 +361,9 @@ def db_create(table):
 	return result
 
 def db_delete(table):
+	""" Delete a key/value table from DynamoDB.
+			@param table: The name of the table.
+	"""
 	db = boto3.client('dynamodb')
 	result = db.delete_table(
  		TableName = table,
