@@ -130,3 +130,6 @@ assert "Content-Type" in dcpim.test("header", [])
 
 # hashfile
 assert len(dcpim.test("hashfile", ["README.md"])) > 2
+
+# list_files
+assert len(dcpim.test("list_files", ["."])) > 5
