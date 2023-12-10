@@ -1,7 +1,7 @@
-Help on module dcpim:
+Help on module dcpim.dcpim in dcpim:
 
 NAME
-    dcpim
+    dcpim.dcpim
 
 DESCRIPTION
     DCPIM is a general purpose Python 3.x library that contains a lot of
@@ -156,6 +156,6 @@ DATA
     __VERSION__ = '1.0'
 
 FILE
-    /home/s24/git/utils/dcpim.py
+    /home/s24/git/utils/dcpim/dcpim.py
 
 

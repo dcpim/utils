@@ -23,5 +23,4 @@ jobs:
         pylint --indent-string "\t" --disable=broad-except,bare-except,no-else-return $(git ls-files '*.py')
     - name: Running tests
       run: |
-        python -c "import dcpim;help(dcpim)" > USAGE.txt
-        python test.py
+        python dcpim/test.py
