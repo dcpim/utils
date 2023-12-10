@@ -3,7 +3,7 @@
 	Patrick Lambert - http://dendory.net - Provided under the MIT License
 """
 
-__VERSION__ = "1.0"
+__VERSION__ = "1.0.1"
 
 import re
 import os
@@ -22,6 +22,7 @@ import datetime
 import urllib.parse
 import urllib.request
 from http.cookiejar import CookieJar
+import boto3
 
 def syslog(log_name, log_debug = False):
 	""" Return a handle for syslog with sensible defaults.
@@ -342,7 +343,67 @@ def list_files(folder, pattern="*"):
 			matches.append(os.path.join(root, filename))
 	return matches
 
+def db_create(table):
+	""" Create a key/value table in DynamoDB.
+			@param table: The name of the table.
+	"""
+	db = boto3.client('dynamodb')
+	result = db.create_table(
+ 		TableName = table,
+ 		KeySchema = [
+ 			{"AttributeName": "key", "KeyType": "HASH"}
+ 		],
+ 		AttributeDefinitions = [
+ 			{"AttributeName": "key", "AttributeType": "S"}
+ 		],
+ 			BillingMode = "PAY_PER_REQUEST"
+ 	)
+	return result
 
+def db_delete(table):
+	""" Delete a key/value table from DynamoDB.
+			@param table: The name of the table.
+	"""
+	db = boto3.client('dynamodb')
+	result = db.delete_table(
+ 		TableName = table,
+ 	)
+	return result
+
+def db_put(table, key, value):
+	""" Store a key/value in a DynamoDB table.
+			@param table: The name of the table.
+			@param key: Key name.
+			@param value: Value to store.
+	"""
+	db = boto3.client('dynamodb')
+	result = db.put_item(
+		TableName = table,
+		Item = {
+			"key": {'S': key},
+			"value": {'S': str(value)}
+		}
+	)
+	return result['ResponseMetadata']
+
+def db_get(table, key = None):
+	""" Return the value for a key or a list of key/value
+		items from a DynamoDB table.
+			@param table: The name of the table.
+			@param key: Key name (optional).
+	"""
+	db = boto3.client('dynamodb')
+	if not key:
+		output = []
+		result = db.scan(TableName = table)
+		for item in result['Items']:
+			output.append({item['key']['S']: item['value']['S']})
+		return output
+	result = db.get_item(
+		TableName = table,
+		Key = { "key": {'S': key} }
+	)
+	return result['Item']['value']['S']
 
 
 def test(func, arg):
