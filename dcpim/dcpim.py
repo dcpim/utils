@@ -3,7 +3,7 @@
 	Patrick Lambert - http://dendory.net - Provided under the MIT License
 """
 
-__VERSION__ = "1.0"
+__VERSION__ = "1.0.1"
 
 import re
 import os
@@ -11,6 +11,7 @@ import sys
 import time
 import uuid
 import json
+import boto3
 import string
 import random
 import fnmatch
@@ -342,7 +343,26 @@ def list_files(folder, pattern="*"):
 			matches.append(os.path.join(root, filename))
 	return matches
 
+def db_create(table):
+	db = boto3.client('dynamodb')
+	result = db.create_table(
+ 		TableName = table,
+ 		KeySchema = [
+ 			{"AttributeName": "key", "KeyType": "HASH"}
+ 		],
+ 		AttributeDefinitions = [
+ 			{"AttributeName": "key", "AttributeType": "S"}
+ 		],
+ 			BillingMode = "PAY_PER_REQUEST"
+ 	)
+	return result
 
+def db_delete(table):
+	db = boto3.client('dynamodb')
+	result = db.delete_table(
+ 		TableName = table,
+ 	)
+	return result
 
 
 def test(func, arg):
