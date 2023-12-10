@@ -7,8 +7,6 @@ setup(
   packages = ['dcpim'],
   version = dcpim.dcpim.__VERSION__,
   description = 'This is a general purpose Python 3.x library used by DCPIM.',
-  long_description = 'This is a general purpose Python 3.x library used by DCPIM.',
-  long_description_content_type = 'text/markdown',
   author = 'Patrick Lambert',
   license = 'MIT',
   author_email = 'patrick@dendory.ca',
