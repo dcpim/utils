@@ -1,6 +1,7 @@
 """ Setup file fopr PyPi. """
 from setuptools import setup
 import dcpim
+import boto3
 
 setup(
   name = 'dcpim',
@@ -12,6 +13,6 @@ setup(
   author_email = 'patrick@dendory.ca',
   url = 'https://github.com/dcpim/utils',
   download_url = 'https://github.com/dcpim/utils/archive/master.zip',
-  keywords = ['dcpim', 'util'],
+  keywords = ['dcpim', 'dynamodb', 'aws', 'util'],
   classifiers = [],
 )
