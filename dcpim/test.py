@@ -133,3 +133,8 @@ assert len(dcpim.test("hashfile", ["README.md"])) > 2
 
 # list_files
 assert len(dcpim.test("list_files", ["."])) > 5
+
+# DynamoDB
+table = dcpim.guid()
+assert "Success" in dcpim.test("create", [table])
+assert "Success" in dcpim.test("delete", [table])
