@@ -278,12 +278,15 @@ def curl(url, encoding="utf8", cookie=None, data=None):
 			"AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 " \
 			"Safari/537.36"
 		}
-	con = urllib.request.Request(url, headers=headers)
+	if data:
+		con = urllib.request.Request(url, headers=headers, method='POST')
+	else:
+		con = urllib.request.Request(url, headers=headers)
 	cj = CookieJar()
 	opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
 	if data:
 		udata = urllib.parse.urlencode(data).encode()
-		stream = opener.open(con, data=udata, method='POST')
+		stream = opener.open(con, data=udata)
 	else:
 		stream = opener.open(con)
 	result = stream.read()
