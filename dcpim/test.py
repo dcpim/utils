@@ -1,6 +1,5 @@
 """Run tests for DCPIM utils."""
 
-import time
 import dcpim
 
 JSONFILE = "/tmp/" + dcpim.guid() + ".json"
