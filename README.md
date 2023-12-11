@@ -2,16 +2,30 @@
 
 This repo contains a Python library used by DCPIM providing various useful functions.
 
-See: USAGE.txt
+
+## Installation
+Install the library using pip:
+```
+pip install dcpim
+```
 
 
-# Authors
+## Usage
+Import the library then call the method you need:
+```
+import dcpim
+print(dcpim.guid())
+```
+See USAGE.txt for full usage.
+
+
+## Authors
 
 This code was created by:
 Patrick Lambert <patrick@dendory.ca>
 
 
-# License
+## License
 
 Copyright 2023, Patrick Lambert
 
