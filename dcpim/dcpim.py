@@ -22,7 +22,6 @@ import datetime
 import urllib.parse
 import urllib.request
 from http.cookiejar import CookieJar
-import boto3
 
 def syslog(log_name, log_debug = False):
 	""" Return a handle for syslog with sensible defaults.
@@ -347,6 +346,7 @@ def db_create(table):
 	""" Create a key/value table in DynamoDB.
 			@param table: The name of the table.
 	"""
+	import boto3
 	db = boto3.client('dynamodb')
 	result = db.create_table(
  		TableName = table,
@@ -358,12 +358,22 @@ def db_create(table):
  		],
  			BillingMode = "PAY_PER_REQUEST"
  	)
+	status = "CREATING"
+	attempts = 10
+	while status == "CREATING":
+		response = db.describe_table(TableName = table)
+		status = response['Table']['TableStatus']
+		time.sleep(1)
+		attempts -= 1
+		if attempts < 0:
+			break
 	return result
 
 def db_delete(table):
 	""" Delete a key/value table from DynamoDB.
 			@param table: The name of the table.
 	"""
+	import boto3
 	db = boto3.client('dynamodb')
 	result = db.delete_table(
  		TableName = table,
@@ -376,6 +386,7 @@ def db_put(table, key, value):
 			@param key: Key name.
 			@param value: Value to store.
 	"""
+	import boto3
 	db = boto3.client('dynamodb')
 	result = db.put_item(
 		TableName = table,
@@ -392,6 +403,7 @@ def db_get(table, key = None):
 			@param table: The name of the table.
 			@param key: Key name (optional).
 	"""
+	import boto3
 	db = boto3.client('dynamodb')
 	if not key:
 		output = []
