@@ -257,12 +257,13 @@ def email(fromaddr, toaddr, subject, body):
 	+ "\nTo: " + str(toaddr) +"\nSubject: " + str(subject).replace('\n','')
 	.replace('\r','') + "\n\n" + str(body) + "\n")
 
-def curl(url, encoding="utf8", cookie=None):
+def curl(url, encoding="utf8", cookie=None, data=None):
 	""" Get the content of a URL.
 			@param url: The URL to query
 			@param encoding: The decoding format (optional, defaults to UTF-8)
 			@param cookie: The cookie string in format key1=value1;key2=value2
-			(optional)
+   			(optional)
+			@param cookie: A POST data object. (optional)
 	"""
 	if cookie:
 		headers = {
@@ -280,7 +281,11 @@ def curl(url, encoding="utf8", cookie=None):
 	con = urllib.request.Request(url, headers=headers)
 	cj = CookieJar()
 	opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
-	stream = opener.open(con)
+	if data:
+		udata = urllib.parse.urlencode(data).encode()
+		stream = opener.open(con, data=udata, method='POST')
+	else:
+		stream = opener.open(con)
 	result = stream.read()
 	charset = stream.info().get_param('charset', encoding)
 	return result.decode(charset)
