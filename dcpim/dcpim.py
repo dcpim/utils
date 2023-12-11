@@ -3,7 +3,7 @@
 	Patrick Lambert - http://dendory.net - Provided under the MIT License
 """
 
-__VERSION__ = "1.0.3"
+__VERSION__ = "1.0.4"
 
 import re
 import os
