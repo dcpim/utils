@@ -138,7 +138,6 @@ assert len(dcpim.test("list_files", ["."])) > 5
 # DynamoDB
 TABLE = dcpim.guid()
 assert "TableDescription" in dcpim.test("db_create", [TABLE])
-time.sleep(10)
 assert "RequestId" in dcpim.test("db_put", [
 	TABLE,
 	"key1",
@@ -164,5 +163,4 @@ assert dcpim.test("db_get", [TABLE, "key2"]) \
 assert dcpim.test("db_get", [TABLE, "key3"]) \
 	== "{'name': 'John Doe', 'age': 28}"
 assert len(dcpim.test("db_get", [TABLE])) == 3
-time.sleep(5)
 assert "TableDescription" in dcpim.test("db_delete", [TABLE])
