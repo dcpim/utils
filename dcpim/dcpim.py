@@ -3,7 +3,7 @@
 	Patrick Lambert - http://dendory.net - Provided under the MIT License
 """
 
-__VERSION__ = "1.0.4"
+__VERSION__ = "1.0.5"
 
 import re
 import os
@@ -257,12 +257,13 @@ def email(fromaddr, toaddr, subject, body):
 	+ "\nTo: " + str(toaddr) +"\nSubject: " + str(subject).replace('\n','')
 	.replace('\r','') + "\n\n" + str(body) + "\n")
 
-def curl(url, encoding="utf8", cookie=None):
+def curl(url, encoding="utf8", cookie=None, data=None):
 	""" Get the content of a URL.
 			@param url: The URL to query
 			@param encoding: The decoding format (optional, defaults to UTF-8)
 			@param cookie: The cookie string in format key1=value1;key2=value2
-			(optional)
+   			(optional)
+			@param cookie: A POST data object. (optional)
 	"""
 	if cookie:
 		headers = {
@@ -277,10 +278,17 @@ def curl(url, encoding="utf8", cookie=None):
 			"AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 " \
 			"Safari/537.36"
 		}
-	con = urllib.request.Request(url, headers=headers)
+	if data:
+		con = urllib.request.Request(url, headers=headers, method='POST')
+	else:
+		con = urllib.request.Request(url, headers=headers)
 	cj = CookieJar()
 	opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
-	stream = opener.open(con)
+	if data:
+		udata = urllib.parse.urlencode(data).encode()
+		stream = opener.open(con, data=udata)
+	else:
+		stream = opener.open(con)
 	result = stream.read()
 	charset = stream.info().get_param('charset', encoding)
 	return result.decode(charset)
