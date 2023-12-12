@@ -5,8 +5,8 @@ NAME
 
 DESCRIPTION
     DCPIM is a general purpose Python 3.x library that contains a lot of
-    commonly done operations inside of a single package. (C) 2018-2023
-    Patrick Lambert - http://dendory.net - Provided under the MIT License
+    commonly done operations inside of a single package. 
+    (C) 2018-2024 Patrick Lambert - Provided under the MIT License
 
 FUNCTIONS
     alphanum(text, symbols=False, spaces=False)
@@ -29,12 +29,13 @@ FUNCTIONS
         Run a command and return the output.
         @param command: The command to run
     
-    curl(url, encoding='utf8', cookie=None)
+    curl(url, encoding='utf8', cookie=None, data=None)
         Get the content of a URL.
         @param url: The URL to query
         @param encoding: The decoding format (optional, defaults to UTF-8)
         @param cookie: The cookie string in format key1=value1;key2=value2
         (optional)
+        @param cookie: A POST data object. (optional)
     
     datetime2unixtime(date_time)
         Convert date/time string to a unixtime number.
@@ -173,7 +174,7 @@ FUNCTIONS
         @param text: The text to encode
 
 DATA
-    __VERSION__ = '1.0.1'
+    __VERSION__ = '1.0.5'
 
 FILE
     /home/s24/git/utils/dcpim/dcpim.py
