@@ -425,6 +425,53 @@ def db_get(table, key = None):
 	)
 	return result['Item']['value']['S']
 
+def q_push(topic, message):
+	""" Push a message to an SQS topic.
+		@param topic: The name of a topic
+		@param message: String of data to push.
+	"""
+	import boto3
+	sqs = boto3.client('sqs')
+
+	q = None
+	queues = sqs.list_queues()
+	for queue in queues['QueueUrls']:
+		if topic == queue.split('/')[-1]
+			q = queue
+
+	if not q:
+		queue = sqs.create_queue(QueueName=topic)
+		q = queue['QueueUrl']
+
+	response = sqs.send_message(QueueUrl=q, MessageBody=message)
+
+	return response['MessageId']
+
+def q_pull(topic):
+	""" Pull a message from an SQS topic.
+		@param topic: The name of a topic
+	"""
+	import boto3
+	sqs = boto3.client('sqs')
+
+	q = None
+	queues = sqs.list_queues()
+	for queue in queues['QueueUrls']:
+		if topic == queue.split('/')[-1]
+			q = queue
+
+	if not q:
+		queue = sqs.create_queue(QueueName=topic)
+		q = queue['QueueUrl']
+
+	response = sqs.receive_message(QueueUrl=q)
+	body = response['Messages'][0]['Body']
+	id = response['Messages'][0]['ReceiptHandle']
+
+	sqs.delete_message(QueueUrl=q, ReceiptHandle=id)
+
+	return body
+
 
 def test(func, arg):
 	""" Test a function with optional arguments.
