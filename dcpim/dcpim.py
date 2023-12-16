@@ -466,9 +466,9 @@ def q_pull(topic):
 
 	response = sqs.receive_message(QueueUrl=q)
 	body = response['Messages'][0]['Body']
-	id = response['Messages'][0]['ReceiptHandle']
+	qid = response['Messages'][0]['ReceiptHandle']
 
-	sqs.delete_message(QueueUrl=q, ReceiptHandle=id)
+	sqs.delete_message(QueueUrl=q, ReceiptHandle=qid)
 
 	return body
 
