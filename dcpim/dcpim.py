@@ -3,7 +3,7 @@
  	(C) 2018-2024 Patrick Lambert - Provided under the MIT License
 """
 
-__VERSION__ = "1.0.5"
+__VERSION__ = "1.0.6"
 
 import re
 import os
@@ -436,7 +436,7 @@ def q_push(topic, message):
 	q = None
 	queues = sqs.list_queues()
 	for queue in queues['QueueUrls']:
-		if topic == queue.split('/')[-1]
+		if topic == queue.split('/')[-1]:
 			q = queue
 
 	if not q:
@@ -457,7 +457,7 @@ def q_pull(topic):
 	q = None
 	queues = sqs.list_queues()
 	for queue in queues['QueueUrls']:
-		if topic == queue.split('/')[-1]
+		if topic == queue.split('/')[-1]:
 			q = queue
 
 	if not q:
