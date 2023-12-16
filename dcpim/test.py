@@ -163,3 +163,12 @@ assert dcpim.test("db_get", [TABLE, "key3"]) \
 	== "{'name': 'John Doe', 'age': 28}"
 assert len(dcpim.test("db_get", [TABLE])) == 3
 assert "TableDescription" in dcpim.test("db_delete", [TABLE])
+
+# SQS
+Q = dcpim.guid()
+assert dcpim.test("q_pull", [Q]) == None
+assert len(dcpim.test("q_push", [Q, "Test message 1"])) > 1
+assert len(dcpim.test("q_push", [Q, "Test message 2"])) > 1
+assert dcpim.test("q_pull", [Q]) == "Test message 2"
+assert dcpim.test("q_pull", [Q]) == "Test message 1"
+assert dcpim.test("q_pull", [Q]) == None
