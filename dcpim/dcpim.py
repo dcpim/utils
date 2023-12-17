@@ -467,6 +467,12 @@ def q_pull(topic):
 		q = queue['QueueUrl']
 
 	response = sqs.receive_message(QueueUrl=q)
+
+	if 'Messages' not in response:
+		return None
+	if len(response['Messages']) < 1:
+		return None
+
 	body = response['Messages'][0]['Body']
 	qid = response['Messages'][0]['ReceiptHandle']
 
