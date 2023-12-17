@@ -481,7 +481,8 @@ def q_pull(topic):
 	info = sqs.get_queue_attributes(QueueUrl=q, AttributeNames=['All'])
 	print(info)
 	if info['Attributes']['ApproximateNumberOfMessages'] == 0:
-		sqs.delete_queue(QueueUrl=q)
+		pass
+#		sqs.delete_queue(QueueUrl=q)
 
 	return body
 
