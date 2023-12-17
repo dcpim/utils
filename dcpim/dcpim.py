@@ -435,9 +435,10 @@ def q_push(topic, message):
 
 	q = None
 	queues = sqs.list_queues()
-	for queue in queues['QueueUrls']:
-		if topic == queue.split('/')[-1]:
-			q = queue
+	if 'QueueUrls' in queues:
+		for queue in queues['QueueUrls']:
+			if topic == queue.split('/')[-1]:
+				q = queue
 
 	if not q:
 		queue = sqs.create_queue(QueueName=topic)
@@ -456,9 +457,10 @@ def q_pull(topic):
 
 	q = None
 	queues = sqs.list_queues()
-	for queue in queues['QueueUrls']:
-		if topic == queue.split('/')[-1]:
-			q = queue
+	if 'QueueUrls' in queues:
+		for queue in queues['QueueUrls']:
+			if topic == queue.split('/')[-1]:
+				q = queue
 
 	if not q:
 		queue = sqs.create_queue(QueueName=topic)
