@@ -466,6 +466,7 @@ def q_pull(topic):
 		return None
 
 	response = sqs.receive_message(QueueUrl=q)
+	print(response)
 
 	if 'Messages' not in response:
 		return None
@@ -478,6 +479,7 @@ def q_pull(topic):
 	sqs.delete_message(QueueUrl=q, ReceiptHandle=qid)
 
 	info = sqs.get_queue_attributes(QueueUrl=q, AttributeNames=['All'])
+	print(info)
 	if info['Attributes']['ApproximateNumberOfMessages'] == 0:
 		sqs.delete_queue(QueueUrl=q)
 
