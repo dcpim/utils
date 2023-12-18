@@ -443,6 +443,11 @@ def q_push(topic, message):
 	if not q:
 		queue = sqs.create_queue(QueueName=topic)
 		q = queue['QueueUrl']
+		while True:
+			queues = sqs.list_queues()
+			if q in queues['QueueUrls']:
+				break
+			time.sleep(1)
 
 	response = sqs.send_message(QueueUrl=q, MessageBody=message)
 
