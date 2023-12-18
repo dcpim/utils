@@ -166,7 +166,7 @@ assert len(dcpim.test("db_get", [TABLE])) == 3
 assert "TableDescription" in dcpim.test("db_delete", [TABLE])
 
 # SQS
-Q = "dcpim.test.{}".format(dcpim.guid())
+Q = "dcpim-test-{}".format(dcpim.guid())
 assert dcpim.test("q_pull", [Q]) is None
 assert len(dcpim.test("q_push", [Q, "Test message 1"])) > 1
 assert len(dcpim.test("q_push", [Q, "Test message 2"])) > 1
