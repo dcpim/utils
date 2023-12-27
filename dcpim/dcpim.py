@@ -444,7 +444,10 @@ def q_push(topic, message):
 	if not q:
 		queue = sqs.create_queue(
 			QueueName=topic,
-			Attributes={'FifoQueue': 'true'}
+			Attributes={
+				'FifoQueue': 'true',
+				'ContentBasedDeduplication': 'true'
+			}
 		)
 		q = queue['QueueUrl']
 		while True:
