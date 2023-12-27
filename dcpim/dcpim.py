@@ -432,6 +432,7 @@ def q_push(topic, message):
 	"""
 	import boto3
 	sqs = boto3.client('sqs')
+	topic = "{}.fifo".format(topic)
 
 	q = None
 	queues = sqs.list_queues()
@@ -441,7 +442,10 @@ def q_push(topic, message):
 				q = queue
 
 	if not q:
-		queue = sqs.create_queue(QueueName=topic)
+		queue = sqs.create_queue(
+			QueueName=topic,
+			Attributes={'FifoQueue': 'true'}
+		)
 		q = queue['QueueUrl']
 		while True:
 			queues = sqs.list_queues()
@@ -459,6 +463,7 @@ def q_pull(topic):
 	"""
 	import boto3
 	sqs = boto3.client('sqs')
+	topic = "{}.fifo".format(topic)
 
 	q = None
 	queues = sqs.list_queues()
