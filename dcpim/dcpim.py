@@ -453,7 +453,11 @@ def q_push(topic, message):
 				break
 			time.sleep(1)
 
-	response = sqs.send_message(QueueUrl=q, MessageBody=message)
+	response = sqs.send_message(
+		QueueUrl=q,
+		MessageBody=message,
+		MessageGroupId='dcpim'
+	)
 
 	return response['MessageId']
 
