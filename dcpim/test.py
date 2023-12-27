@@ -170,7 +170,6 @@ Q = "dcpim-test-{}".format(dcpim.guid())
 assert dcpim.test("q_pull", [Q]) is None
 assert len(dcpim.test("q_push", [Q, "Test message 1"])) > 1
 assert len(dcpim.test("q_push", [Q, "Test message 2"])) > 1
-time.sleep(10) # SQS seems to have random delays on message availability
 assert dcpim.test("q_pull", [Q]) == "Test message 2"
 assert dcpim.test("q_pull", [Q]) == "Test message 1"
 assert dcpim.test("q_pull", [Q]) is None
